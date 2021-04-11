@@ -1,0 +1,98 @@
+{include file="./header.html"}
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {include file="./sidebar.html"}
+
+    <!-- Page Content Holder -->
+
+    <div id="content">
+        {include file="./navbar.html"}
+
+    <div style="margin: 0 auto;text-align: center;margin-top: 40px">
+        <div class="card" style="width: 70%; margin: 0 auto;text-align: center;">
+            <div class="card-header">
+                <h2>Ajouter Module</h2>
+            </div>
+            <div class="card-body">
+                {if $messageError neq ''}
+                <div class="alert {$alert_style}">
+                    {$messageError}
+                </div>
+                {/if}
+                <form method="post" action="Module.php" >
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="module">Nom de Module:</label>
+                                <input type="text" name="module" id="module" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="semestre">Semestre:</label>
+                                <select class="form-control" name="semestre" id="semestre">
+                                    <option value="Semaistre 1">Semaistre 1</option>
+                                    <option value="Semaistre 2">Semaistre 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filiere">Filiere:</label>
+                                <select class="form-control" name="filiere" id="filiere">
+                                     <option value="-1" selected disabled>selelct Filiere</option>
+
+                                    {foreach $filieres as $filiere}
+                                    <option value="{$filiere['id_filiere']}">{$filiere['intitule']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="prof">Professeur:</label>
+                                <select class="form-control" name="prof" id="prof">
+                                <option value="-1" selected disabled>selelct Professeur</option>
+
+                                    {foreach $profs as $prof}
+                                    <option value="{$prof['id_prof']}">{$prof['nom']} {$prof['prenom']}}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center" style="margin-top: 20px">
+                        <button type="submit" class="btn btn-info" name="submit">Ajouter</button>
+                        <button class="btn btn-dark" name="annuler">Annuller</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div style="margin-top: 30px">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Id Module</th>
+                    <th>Nom Module</th>
+                    <th>Semestre</th>
+                </tr>
+                </thead>
+                <tbody id="dataEtudBody">
+                {foreach $modules as $module}
+                <tr>
+                    <td>{$module['id_module']}</td>
+                    <td>{$module['intitule']}</td>
+                    <td>{$module['semestre']}</td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+{include file="./footer.html"}

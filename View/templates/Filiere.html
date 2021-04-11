@@ -1,0 +1,61 @@
+{include file="./header.html"}
+<script>
+    var data = {$locals|@json_encode}
+    var dataInputs = {};
+</script>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {include file="./sidebar.html"}
+
+    <!-- Page Content Holder -->
+
+    <div id="content">
+        {include file="./navbar.html"}
+
+    <div style="margin: 0 auto;text-align: center;margin-top: 100px">
+    <div class="card" style="width: 55%; margin: 0 auto;text-align: center;">
+        <div class="card-header">
+            <h2>Ajouter Filiere</h2>
+        </div>
+        <div class="card-body">
+            {if $messageError neq ''}
+            <div class="alert {$alert_style}">
+                {$messageError}
+            </div>
+            {/if}
+            <form method="post" action="Filiere.php" >
+                <div class="form-group">
+                    <label for="filiere">Nom de la filiere:</label>
+                    <input type="text" name="filiere" id="filiere" class="form-control" required>
+                </div>
+
+                <div class="form-group text-center mt-2">
+                    <button type="submit" class="btn btn-info" name="submit">Ajouter</button>
+                    <button class="btn btn-dark" name="annuler">Annuller</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Id Filiere</th>
+                    <th>Nom Fliere</th>
+                </tr>
+                </thead>
+                <tbody id="dataEtudBody">
+                {foreach $filieres as $filiere}
+                <tr>
+                    <td>{$filiere['id_filiere']}</td>
+                    <td>{$filiere['intitule']}</td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+{include file="./footer.html"}

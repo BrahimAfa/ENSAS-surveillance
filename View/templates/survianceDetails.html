@@ -1,0 +1,91 @@
+{include file="./header.html"}
+<script src="../View/templates/scripts/survianceDatils.js"></script>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {include file="./sidebar.html"}
+
+    <!-- Page Content Holder -->
+
+    <div id="content">
+        {include file="./navbar.html"}
+        <div class="mb-4 card" style="width: 100%;">
+          <h5 class="card-header">Filter</h5>
+                <form action="./PDF.php" method="POST">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex form-gr
+                oup w-25 m-3">
+                    <input id="prof"style="background: rgba(0, 0, 0, 0.05);" type="text" name="prof" placeholder="Professeur"
+                        class="form-control">
+                </div>
+                <input class="m-3 d-flex btn btn-info" type="submit"  name="submit" value="Export Surviance" />
+            </div>
+            </form>
+
+
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Filière</th>
+                        <th>Date</th>
+                        <th>Exam</th>
+                        <th>show</th>
+
+                    </tr>
+                </thead>
+                <tbody id="dataEtudBody">
+<!-- 'id_annee' 'id_module' 'date' 'HeureD' 'HeureF' 'Exam' 'filiere' 'module' -->
+                    {foreach $SurvianceDetails as $detail}
+                      <tr>
+                        <td>{$detail['module']}</td>
+                        <td>{$detail['filiere']}</td>
+                        <td>{$detail['date']} From: {$detail['HeureD']} ~ To: {$detail['HeureF']}</td>
+                        <td> {$detail['Exam']}</td>
+                        <td style="cursor: pointer; text-align: center;">
+                            <button class="button trigger">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                    <tr class="button--disapear">
+                        <td colspan="5">
+                            <table class="w-100" style="border: 20px solid #e4e4e4">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Local</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {foreach $detail['profs'] as $survProf}
+                                        <tr>
+                                            <td>{$survProf['nom']}</td>
+                                            <td>{$survProf['prenom']}</td>
+                                            <td>{$survProf['email']}</td>
+                                            <td>{$survProf['local']}</td>
+                                        </tr>
+                                    {/foreach}
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    {/foreach}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $('#prof').on('input',WaitAndSendSearchRequest);
+        setOniputEvent();
+
+    </script>
+    {include file="./footer.html"}

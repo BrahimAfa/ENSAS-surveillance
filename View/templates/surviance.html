@@ -1,0 +1,148 @@
+{include file="./header.html"}
+<script>
+        var data = {$locals|@json_encode}
+        var dataInputs = {};
+
+</script>
+<script src="../View/templates/scripts/surviance.js"></script>
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        {include file="./sidebar.html"}
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+        {include file="./navbar.html"}
+
+    <div class="card m-auto w-50">
+            <div class="card-header text-lg-center">
+                <h2>Surviance</h2>
+            </div>
+            <div class="card-body">
+                {if $messageError neq ''}
+                <div class="alert {$alert_style}">
+                    {$message}
+                </div>
+                {/if}
+                <form method="post" action="admin.php">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filiere" class="control-label">Module</label>
+                                <select onchange="changeInput(this)" class="form-control" name="id_module" id="module">
+                                    <option value="-1" selected disabled>selelct Module</option>
+
+                                    {foreach $modules as $module}
+                                    <option value="{$module['id_module']}">{$module['intitule']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Exam" class="control-label">Module</label>
+                                <select onchange="changeInput(this)" class="form-control" name="Exam" id="module">
+                                    <option value="-1" selected disabled>selelct Exam</option>
+                                    <option value="DS1">devoir surveillé 1</option>
+                                    <option value="DS2">devoir surveillé 2</option>
+                                    <option value="RATTRAPAGE">Rattrapage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filiere" class="control-label">Filière</label>
+                                <select onchange="changeInput(this)" class="form-control" name="id_filiere"
+                                    id="filiere">
+                                    <option value="-1" selected disabled>selelct Filiere</option>
+
+                                    {foreach $filieres as $filiere}
+                                    <option value="{$filiere['id_filiere']}">{$filiere['intitule']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filiere" class="control-label">Anneé Univir</label>
+                                <select onchange="changeInput(this)" class="form-control" name="id_annee" id="filiere">
+                                    <option value="-1" selected disabled>selelct Annee</option>
+
+                                    {foreach $anneesUnivs as $annee}
+                                    <option value="{$annee['id_annee']}">{$annee['annee']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="nom">Date:</label>
+                                <input onchange="changeInput(this)" type="date" name="date" id="nom"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password">Heure Debut</label>
+                                <input onchange="changeInput(this)" type="text" name="HeureD" id="password"
+                                    placeholder="08:00" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password">Heure Fin</label>
+                                <input onchange="changeInput(this)" type="text" name="HeureF" id="password"
+                                    placeholder="10:00" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider mt-lg-3"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password">Surviant</label>
+                                <select onchange="profSelected(this)" class="form-control" name="filiere" id="filiere">
+                                    <option value="-1" selected disabled>selelct Professeur</option>
+                                    {foreach $professeurs as $pro}
+
+                                    <option value="#{$pro['id_prof']}- {$pro['nom']} {$pro['prenom']}">{$pro['nom']}
+                                        {$pro['prenom']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-striped">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th scope="col">Professuer</th>
+                                        <th scope="col">Local</th>
+                                        <th scope="col">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ProfTableBody" class="text-center">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group text-center mt-2">
+                        <input onclick="sendData()" class="btn btn-info " name="submit" value="Ajouter" />
+                        <input type="reset" class="btn btn-light" name="annuler" value="Annuller">
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+{include file="./footer.html"}
