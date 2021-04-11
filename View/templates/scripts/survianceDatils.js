@@ -59,8 +59,9 @@ function setDataToTableNotFound(){
 function getFullTbaleRow(data){
   var profRow = data.profs.map(getNestedTableDataForProfs).join(' ');
   return `<tr>
-              <td>${data.module}</td>
               <td>${data.filiere}</td>
+              <td>${data.responsable}</td>
+              <td>${data.module}</td>
               <td>${data.date} From: ${data.HeureD} ~ To: ${data.HeureF}</td>
               <td> ${data.Exam}</td>
               <td style="cursor: pointer; text-align: center;">

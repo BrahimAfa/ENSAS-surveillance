@@ -28,8 +28,9 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Module</th>
                         <th>Filière</th>
+                        <th>Responsable</th>
+                        <th>Module</th>
                         <th>Date</th>
                         <th>Exam</th>
                         <th>show</th>
@@ -40,8 +41,9 @@
 <!-- 'id_annee' 'id_module' 'date' 'HeureD' 'HeureF' 'Exam' 'filiere' 'module' -->
                     {foreach $SurvianceDetails as $detail}
                       <tr>
-                        <td>{$detail['module']}</td>
                         <td>{$detail['filiere']}</td>
+                        <td>{$detail['responsable']}</td>
+                        <td>{$detail['module']}</td>
                         <td>{$detail['date']} From: {$detail['HeureD']} ~ To: {$detail['HeureF']}</td>
                         <td> {$detail['Exam']}</td>
                         <td style="cursor: pointer; text-align: center;">

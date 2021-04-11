@@ -46,6 +46,7 @@ function getList($surv){
         $module = reset($moduleModel->getById($value['id_module']));
         $filiere = reset($fliereModel->getById($module['id_filiere']));
         $profsSurv = $detailSurv->getById($value['id_surv']);
+        $profResponsable = reset($profModel->getById($module['id_prof']));
         $profsSurvsDetail = array();
         foreach ($profsSurv as $rowx => $valuex) {
         $prof = reset($profModel->getById($valuex['id_prof']));
@@ -69,6 +70,7 @@ function getList($surv){
             'Exam'=>$value['Exam'],
             'filiere'=>$filiere['intitule'],
             'module'=>$module['intitule'],
+            'responsable'=>$profResponsable['nom'].' '.$profResponsable['prenom'],
             'profs'=>$profsSurvsDetail
 
         );
