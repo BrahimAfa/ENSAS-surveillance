@@ -106,7 +106,9 @@ $pdf->ln();
  $table->easyCell('Local');
  $table->easyCell('Surveillant');
   $table->printRow();
-  $colors = array('#E9F8FF',"#FAD586",'#D5ECC2',"#BFCBA8","#F8EDE3","#29BB89");
+
+
+  $colors = array('#E9F8FF',"#FAD586",'#D5ECC2',"#BFCBA8","#F8EDE3","#29BB89","#BD9354","#FBEEAC","#6E7C7C","#B8B5FF","#9ECCA4","#D0AF84","#F6DFEB","#E2D5D5","#1597BB","#FFE268","#FFB037");
   $prevDate = "";
   $colorsIndex = -1;
 foreach ($survDetails as $row => $value) {
