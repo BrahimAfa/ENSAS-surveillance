@@ -22,26 +22,24 @@ var WaitAndSendSearchRequest = debounce(function() {
   xhr.onreadystatechange = function () {
     // On ne fait quelque chose que si on a tout re�u et que le serveur est ok
     if (xhr.readyState == 4 && xhr.status == 200) {
-
       // alert(xhr.responseText);
       try{
-      setDataToTable(JSON.parse(xhr.responseText));
-      setOniputEvent();
-
+        setDataToTable(JSON.parse(xhr.responseText));
+        setOniputEvent();
       }catch(e){
         console.error(e);
         setDataToTableNotFound();
       }
-    }else{
-              setDataToTableNotFound();
-
-    }
+    }else{ setDataToTableNotFound(); }
   };
   xhr.open("POST", "survianceDetail.php", true);
   // var data = new FormData();
   var data = new FormData()
   console.log($('#prof').val());
   data.append('prof',$('#prof').val())
+  data.append('dateD',$('#dateD').val())
+  data.append('dateF',$('#dateF').val())
+
   xhr.send(data);
 }, 250);
 
@@ -62,7 +60,8 @@ function getFullTbaleRow(data){
               <td>${data.filiere}</td>
               <td>${data.responsable}</td>
               <td>${data.module}</td>
-              <td>${data.date} From: ${data.HeureD} ~ To: ${data.HeureF}</td>
+              <td>${data.date}</td>
+              <td>${data.HeureD} ~ ${data.HeureF}</td>
               <td> ${data.Exam}</td>
               <td style="cursor: pointer; text-align: center;">
                   <button class="button trigger">
@@ -72,7 +71,7 @@ function getFullTbaleRow(data){
           </tr>
 
           <tr class="button--disapear">
-              <td colspan="5">
+              <td colspan="6  ">
                   <table class="w-100" style="border: 20px solid #e4e4e4">
                       <thead>
                           <tr>

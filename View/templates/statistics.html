@@ -1,0 +1,115 @@
+{include file="./header.html"}
+<script>
+    var dataInputs = {};
+</script>
+<script src="../View/templates/scripts/statistics.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    {include file="./sidebar.html"}
+
+    <!-- Page Content Holder -->
+
+    <div id="content">
+        {include file="./navbar.html"}
+        <div class="mb-4 card" style="width: 100%;">
+            <h5 class="card-header">Filter</h5>
+            <form action="./PDF.php" method="POST">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex form-group w-25 m-3">
+                        <select onchange="changeInput(this)" class="form-control" name="id_annee" id="filiere">
+                            <option value="-1" selected disabled>selelct Annee</option>
+                            {foreach $anneesUnivs as $annee}
+                            <option value="{$annee['id_annee']}">{$annee['annee']}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="d-flex form-group w-25 m-3">
+                        <select disabled onchange="changeInput(this)" CLASS="form-control" name="semestre"
+                            id="semestre">
+                            <option value="-1" selected disabled>selelct Semester</option>
+                            <option value="Semester 1">Semester 1</option>
+                            <option value="Semester 2">Semester 2</option>
+                        </select>
+                    </div>
+                    <div class="d-flex form-group w-25 m-3">
+                        <select onchange="changeInput(this)" class="form-control" name="departement" id="departement">
+                            <option value="-1" selected disabled>selelct Departmenet</option>
+                            <option value="Informatique">Informatique</option>
+                            <option value="Industrielle">Industrielle</option>
+                        </select>
+                    </div>
+                    <input class="m-3 d-flex btn btn-info" type="submit" name="submit" value="Search" />
+                </div>
+            </form>
+
+        </div>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div>
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+
+    <script>
+        {literal}
+        const labelsinfor = [
+            'W.Bouarifi',
+            'M.ourrachi',
+            'M.Atlas',
+            'profA',
+            'profB',
+            'profX',
+        ];
+        const data = {
+            labels: ['W.Bouarifi', 'M.ourrachi'],
+            datasets: [{
+                label: 'Anneé 2015/2017',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [3, 2]
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Surviance Chart'
+                    },
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Professeurs'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Séances de Surviance'
+                        }
+                    }
+                }
+            },
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+        {/literal}
+    </script>
+    {include file="./footer.html"}

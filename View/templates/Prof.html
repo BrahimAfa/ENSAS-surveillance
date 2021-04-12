@@ -68,9 +68,10 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Nom prof</th>
-                    <th>Prenom prof</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
                     <th>Email</th>
+                    <th>Departement</th>
                 </tr>
                 </thead>
                 <tbody id="dataEtudBody">
@@ -79,6 +80,8 @@
                     <td>{$prof['nom']}</td>
                     <td>{$prof['prenom']}</td>
                     <td>{$prof['email']}</td>
+                    <td>{$prof['department']}</td>
+
                 </tr>
                 {/foreach}
                 </tbody>

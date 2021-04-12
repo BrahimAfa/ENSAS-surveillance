@@ -10,18 +10,33 @@
     <div id="content">
         {include file="./navbar.html"}
         <div class="mb-4 card" style="width: 100%;">
-          <h5 class="card-header">Filter</h5>
-                <form action="./PDF.php" method="POST">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex form-gr
-                oup w-25 m-3">
-                    <input id="prof"style="background: rgba(0, 0, 0, 0.05);" type="text" name="prof" placeholder="Professeur"
-                        class="form-control">
+            <h5 class="card-header">Filter</h5>
+            <form action="./PDF.php" method="POST">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex form-group w-25 m-3">
+                        <input id="prof" style="background: rgba(0, 0, 0, 0.05);"
+                            type="text" name="prof"
+                            placeholder="Professeur" class="form-control">
+                    </div>
+                        <div class="d-flex form-group w-25 m-3">
+                        <input style="background: rgba(0, 0, 0, 0.05);"
+                            id="dateD"
+                            type="text" name="dateD"
+                            onfocus="(this.type='date')"
+                            onblur="(this.type='text')"
+                            placeholder="Start Date" class="form-control">
+                    </div>
+                    <div class="d-flex form-group w-25 m-3">
+                        <input style="background: rgba(0, 0, 0, 0.05);"
+                            id="dateF"
+                            type="text" name="dateF"
+                            onfocus="(this.type='date')"
+                            onblur="(this.type='text')"
+                            placeholder="End Date" class="form-control">
+                    </div>
+                    <input class="m-3 d-flex btn btn-info" type="submit" name="submit" value="Export Surviance" />
                 </div>
-                <input class="m-3 d-flex btn btn-info" type="submit"  name="submit" value="Export Surviance" />
-            </div>
             </form>
-
 
         </div>
         <div>
@@ -32,19 +47,21 @@
                         <th>Responsable</th>
                         <th>Module</th>
                         <th>Date</th>
+                        <th>Heure</th>
                         <th>Exam</th>
                         <th>show</th>
 
                     </tr>
                 </thead>
                 <tbody id="dataEtudBody">
-<!-- 'id_annee' 'id_module' 'date' 'HeureD' 'HeureF' 'Exam' 'filiere' 'module' -->
+                    <!-- 'id_annee' 'id_module' 'date' 'HeureD' 'HeureF' 'Exam' 'filiere' 'module' -->
                     {foreach $SurvianceDetails as $detail}
-                      <tr>
+                    <tr>
                         <td>{$detail['filiere']}</td>
                         <td>{$detail['responsable']}</td>
                         <td>{$detail['module']}</td>
-                        <td>{$detail['date']} From: {$detail['HeureD']} ~ To: {$detail['HeureF']}</td>
+                        <td>{$detail['date']}</td>
+                        <td>{$detail['HeureD']} ~ {$detail['HeureF']}</td>
                         <td> {$detail['Exam']}</td>
                         <td style="cursor: pointer; text-align: center;">
                             <button class="button trigger">
@@ -54,7 +71,7 @@
 
                     </tr>
                     <tr class="button--disapear">
-                        <td colspan="5">
+                        <td colspan="6">
                             <table class="w-100" style="border: 20px solid #e4e4e4">
                                 <thead>
                                     <tr>
@@ -66,12 +83,12 @@
                                 </thead>
                                 <tbody>
                                     {foreach $detail['profs'] as $survProf}
-                                        <tr>
-                                            <td>{$survProf['nom']}</td>
-                                            <td>{$survProf['prenom']}</td>
-                                            <td>{$survProf['email']}</td>
-                                            <td>{$survProf['local']}</td>
-                                        </tr>
+                                    <tr>
+                                        <td>{$survProf['nom']}</td>
+                                        <td>{$survProf['prenom']}</td>
+                                        <td>{$survProf['email']}</td>
+                                        <td>{$survProf['local']}</td>
+                                    </tr>
                                     {/foreach}
 
                                 </tbody>
@@ -86,7 +103,9 @@
     </div>
 
     <script>
-        $('#prof').on('input',WaitAndSendSearchRequest);
+        $('#prof').on('input', WaitAndSendSearchRequest);
+        $('#dateD').on('change', WaitAndSendSearchRequest);
+        $('#dateF').on('change', WaitAndSendSearchRequest);
         setOniputEvent();
 
     </script>
