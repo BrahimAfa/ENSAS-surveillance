@@ -1,6 +1,6 @@
 <?php
 require_once '_config.inc.php';
-$tpl->display("survianceDetails.html");
+$tpl->display("statistics.html");
 
 //session_start();
 //    if (isset($_POST['admin'])){
@@ -12,7 +12,7 @@ $tpl->display("survianceDetails.html");
 //    header('location:login.php');
 //
 //}
-//if (isset($_POST['scolarite'])){
+//if (isset($statistics.html.html_POST['scolarite'])){
 //    $_SESSION['droit']="scolarite";
 //    header('location:login.php');
 //

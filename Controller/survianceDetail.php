@@ -35,7 +35,8 @@ function getListBasedOnProf($prodId){
         }
     }
     $idSurvStrings = substr($idSurvString, 0, -1);
-    return $survModel->getSurvianceByListOfIds($idSurvStrings);
+    // return $_POST['dateD']
+    return $survModel->getSurvianceByListOfIds($idSurvStrings,$_POST['dateD'],$_POST['dateF']);
 }
 function getList($surv){
     global $fliereModel, $moduleModel, $profModel, $localModel, $detailSurv;

@@ -25,9 +25,9 @@ $detailSurv = new DetailSurviance();
  $pdf->SetFont('helvetica','',10);
  $pdf->AddPage('O','A4');
  $pdf->SetAutoPageBreak(false);
-function getListBasedOnProf($prodId){
+function getListBasedOnProf(){
     global $detailSurv,$survModel,$profModel;
-    $profbyNames =  $profModel->getByName($prodId);
+    $profbyNames =  $profModel->getByName($_POST['prof']);
     $profSurvs = array();
     foreach ($profbyNames as $row => $valuex) {
         $profSurvs =  $detailSurv->getByIdProf($valuex['id_prof']);
@@ -36,7 +36,7 @@ function getListBasedOnProf($prodId){
         }
     }
     $idSurvStrings = substr($idSurvString, 0, -1);
-    return $survModel->getSurvianceByListOfIds($idSurvStrings);
+    return $survModel->getSurvianceByListOfIds($idSurvStrings,$_POST['dateD'],$_POST['dateF']);
 }
 function getList($surv){
     global $fliereModel, $moduleModel, $profModel, $localModel, $detailSurv;
@@ -83,7 +83,7 @@ function getList($surv){
 //====================================================================>>
 if (isset($_POST['prof'])) {
 
-    $result = getListBasedOnProf($_POST['prof']);
+    $result = getListBasedOnProf();
     $survDetails = getList($result);
 // echo var_dump($survDetails);
 $table1=new easyTable($pdf,'{20,40,60,50,30,20,90}','width:100; align:C{LC}; border:RL; border-color:#fff; border-width:0.7');
@@ -136,10 +136,6 @@ foreach ($value['profs'] as $row => $prof) {
  $pdf->Output();
 }
 
-else{
-  echo 'hello';
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -148,8 +144,6 @@ else{
   <title>fpdf</title>
 </head>
 <body>
-<form method="post">
-  <input type="submit" name="prof" value="bra">
-</form>
+  <center>Nothing to see Here!</center>
 </body>
 </html>
